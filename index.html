@@ -276,33 +276,54 @@ button:hover {
 
 <p>Send os info om dit arrangement</p>
 
-<input type="text" placeholder="Dit navn">
+<form
+action="https://formspree.io/f/mdabklnj"
+method="POST"
+>
 
-<input type="text" placeholder="Dato for arrangement">
+<input type="text"
+name="name"
+placeholder="Dit navn"
+required>
 
-<input type="number" placeholder="Antal personer">
+<input type="email"
+name="email"
+placeholder="Din email"
+required>
 
-<textarea rows="5" placeholder="Skriv lidt om arrangementet"></textarea>
+<input type="text"
+name="date"
+placeholder="Dato for arrangement"
+required>
 
-<button onclick="alert('Tak for din forespørgsel! Ring eller skriv gerne direkte også 😊')">
+<input type="number"
+name="persons"
+placeholder="Antal personer"
+required>
+
+<select name="menu">
+
+<option>Menu 1 - 219 kr</option>
+
+<option>Menu 2 - 185 kr</option>
+
+<option>Supervisor pakke - 99 kr</option>
+
+</select>
+
+<textarea
+name="message"
+rows="5"
+placeholder="Skriv lidt om arrangementet">
+</textarea>
+
+<button type="submit">
 Send forespørgsel
 </button>
 
+</form>
+
 </section>
-
-<section class="contact">
-
-<h2>📞 Kontakt os</h2>
-
-<p>Ring, SMS eller send mail – vi svarer hurtigt</p>
-
-<a href="tel:60531341" class="btn">Ring 60531341</a>
-
-<a href="sms:60531341" class="btn">Send SMS</a>
-
-<a href="mailto:patteperfekt@gmail.com" class="btn">
-📧 patteperfekt@gmail.com
-</a>
 
 <div class="socials">
 
