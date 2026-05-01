@@ -275,46 +275,53 @@ button:hover {
 
 <p>Send os information om dit arrangement</p>
 
-<form
-action="https://formspree.io/f/mdabklnj"
-method="POST"
->
+<form action="https://formspree.io/f/mdabklnj" method="POST">
 
-<input type="text"
+<input
+type="text"
 name="name"
 placeholder="Dit navn"
 required>
 
-<input type="email"
+<input
+type="email"
 name="email"
 placeholder="Din email"
 required>
 
-<input type="text"
+<input
+type="text"
 name="date"
 placeholder="Dato for arrangement"
 required>
 
-<input type="number"
+<input
+type="number"
 name="persons"
 placeholder="Antal personer"
 required>
 
 <select name="menu">
 
-<option>Menu 1 - 219 kr</option>
+<option value="Menu 1">
+Menu 1 - 219 kr
+</option>
 
-<option>Menu 2 - 185 kr</option>
+<option value="Menu 2">
+Menu 2 - 185 kr
+</option>
 
-<option>Supervisor pakke - 99 kr</option>
+<option value="Supervisor">
+Supervisor pakke - 99 kr
+</option>
 
 </select>
 
 <textarea
 name="message"
 rows="5"
-placeholder="Skriv lidt om arrangementet">
-</textarea>
+placeholder="Skriv lidt om arrangementet"
+required></textarea>
 
 <button type="submit">
 Send forespørgsel
