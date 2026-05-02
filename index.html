@@ -1,360 +1,49 @@
 <!DOCTYPE html>
-<html lang="da">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patteperfekt</title>
 
-<style>
+<input type="email" name="email" placeholder="Din email" required>
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: white;
-}
+<input type="text" name="date" placeholder="Dato for arrangement" required>
 
-header {
-    background: linear-gradient(135deg, #ff1493, #ff4500);
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.logo {
-    width: 220px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-size: 60px;
-    margin: 0;
-}
-
-header p {
-    font-size: 20px;
-}
-
-.cta {
-    margin-top: 20px;
-}
-
-.btn {
-    background: black;
-    color: white;
-    padding: 15px 25px;
-    text-decoration: none;
-    border-radius: 8px;
-    margin: 5px;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-}
-
-section {
-    padding: 50px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
-
-.pricing {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.card {
-    background: #1c1c1c;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.03);
-}
-
-.price {
-    font-size: 32px;
-    color: #ff1493;
-    font-weight: bold;
-}
-
-.badge {
-    background: #ff1493;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    text-align: center;
-}
-
-.feature {
-    background: #1c1c1c;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.contact {
-    text-align: center;
-    background: #1c1c1c;
-    padding: 40px;
-    border-radius: 15px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #000;
-    margin-top: 40px;
-}
-
-select, input, textarea {
-    padding: 12px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 15px;
-    width: 100%;
-    background: #ff1493;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.gallery img {
-    width: 100%;
-    border-radius: 15px;
-    transition: 0.3s;
-}
-
-.gallery img:hover {
-    transform: scale(1.02);
-}
-
-.socials {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.socials a {
-    color: #ff1493;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<img src="logo.jpg" alt="Patteperfekt Logo" class="logo">
-
-<h1>Patteperfekt</h1>
-
-<p>Helstegt pattegris til fest, firma og events</p>
-
-<div class="cta">
-    <a href="tel:60531341" class="btn">Ring nu</a>
-    <a href="sms:60531341" class="btn">Send SMS</a>
-    <a href="mailto:patteperfekt@gmail.com" class="btn">Send mail</a>
-</div>
-
-</header>
-
-<section>
-
-<h2 style="text-align:center;">Vores menuer</h2>
-
-<div class="pricing">
-
-<div class="card">
-    <div class="badge">Mest populære</div>
-    <h3>Menu 1</h3>
-    <p>Helstegt pattegris med salater og flutes</p>
-    <p class="price">219 kr / person</p>
-</div>
-
-<div class="card">
-    <h3>Menu 2</h3>
-    <p>Helstegt pattegris med kartofler</p>
-    <p class="price">185 kr / person</p>
-</div>
-
-<div class="card">
-    <h3>Supervisor pakke</h3>
-    <p>Vi guider jer – I gør det selv</p>
-    <p class="price">99 kr / person</p>
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2 style="text-align:center;">Prisberegner</h2>
-
-<div class="contact">
-
-<select id="menu">
-    <option value="219">Menu 1 - 219 kr</option>
-    <option value="185">Menu 2 - 185 kr</option>
-    <option value="99">Supervisor - 99 kr</option>
-</select>
-
-<input type="number" id="persons" placeholder="Antal personer">
-
-<button onclick="calculatePrice()">Beregn pris</button>
-
-<h2 id="result"></h2>
-
-</div>
-
-</section>
-
-<section>
-
-<h2 style="text-align:center;">Galleri</h2>
-
-<div class="gallery">
-
-<img src="menu.jpg" alt="Patteperfekt Menu">
-
-</div>
-
-</section>
-
-<section>
-
-<h2 style="text-align:center;">Derfor vælger kunder os</h2>
-
-<div class="features">
-
-<div class="feature">Sprødt og saftigt kød</div>
-<div class="feature">Klar til tiden</div>
-<div class="feature">Perfekt til store selskaber</div>
-<div class="feature">Nem og tryg bestilling</div>
-
-</div>
-
-</section>
-
-<section class="contact">
-
-<h2>Online forespørgsel</h2>
-
-<p>Send os information om dit arrangement</p>
-
-<form action="https://formspree.io/f/mgodovja" method="POST">
-
-<input
-type="text"
-name="name"
-placeholder="Dit navn"
-required>
-
-<input
-type="email"
-name="email"
-placeholder="Din email"
-required>
-
-<input
-type="text"
-name="date"
-placeholder="Dato for arrangement"
-required>
-
-<input
-type="number"
-name="persons"
-placeholder="Antal personer"
-required>
+<input type="number" name="persons" placeholder="Antal personer" required>
 
 <select name="menu">
-
-<option value="Menu 1">
-Menu 1 - 219 kr
-</option>
-
-<option value="Menu 2">
-Menu 2 - 185 kr
-</option>
-
-<option value="Supervisor">
-Supervisor pakke - 99 kr
-</option>
-
+<option value="Menu 1">Menu 1 - 219 kr</option>
+<option value="Menu 2">Menu 2 - 185 kr</option>
+<option value="Supervisor">Supervisor - 99 kr</option>
 </select>
 
-<textarea
-name="message"
-rows="5"
-placeholder="Skriv lidt om arrangementet"
-required></textarea>
+<textarea name="message" rows="6" placeholder="Skriv lidt om arrangementet"></textarea>
 
-<button type="submit">
-Send forespørgsel
-</button>
+<button type="submit">Send forespørgsel</button>
 
 </form>
 
+</div>
+
+</div>
 </section>
 
-<section class="contact">
+<section>
+<div class="container">
 
-<h2>Kontakt</h2>
+<h2 class="section-title">Kontakt</h2>
 
-<p>Ring, send SMS eller mail</p>
-
-<a href="tel:60531341" class="btn">60531341</a>
-
-<a href="sms:60531341" class="btn">SMS</a>
-
-<a href="mailto:patteperfekt@gmail.com" class="btn">
-patteperfekt@gmail.com
-</a>
-
-<div class="socials">
+<div class="contact-box">
 
 <p>
-<a href="https://www.facebook.com/profile.php?id=61566722272167" target="_blank">
-Facebook
-</a>
+Kontakt os direkte på telefon, SMS eller mail.
 </p>
+
+<div class="contact-links">
+<a href="tel:60531341">60531341</a>
+<a href="sms:60531341">SMS</a>
+<a href="mailto:patteperfekt@gmail.com">patteperfekt@gmail.com</a>
+<a href="https://www.facebook.com/profile.php?id=61566722272167" target="_blank">Facebook</a>
+</div>
 
 </div>
 
+</div>
 </section>
 
 <footer>
@@ -368,16 +57,12 @@ Facebook
 function calculatePrice() {
 
 let price = document.getElementById("menu").value;
-
 let persons = document.getElementById("persons").value;
 
 if(persons <= 0) {
-
-document.getElementById("result").innerText =
-"Indtast antal personer";
-
-return;
-
+    document.getElementById("result").innerText =
+    "Indtast antal personer";
+    return;
 }
 
 let total = price * persons;
