@@ -1,4 +1,458 @@
+```html
 <!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patteperfekt</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0b0b0b;
+    color: #f2f2f2;
+    line-height: 1.6;
+}
+
+header {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    url('menu.jpg') center/cover;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.logo {
+    width: 180px;
+    border-radius: 24px;
+    margin-bottom: 25px;
+    border: 3px solid rgba(255,20,147,0.5);
+    box-shadow: 0 0 35px rgba(255,20,147,0.25);
+}
+
+header h1 {
+    font-size: clamp(50px, 9vw, 110px);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.highlight {
+    color: #ff4fb2;
+}
+
+header p {
+    font-size: 20px;
+    color: #d6d6d6;
+    max-width: 700px;
+    margin: 20px auto 35px auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 16px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #ff1493;
+    color: white;
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    background: rgba(255,255,255,0.05);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+section {
+    padding: 90px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    font-size: 42px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #b5b5b5;
+    max-width: 700px;
+    margin: auto auto 50px auto;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.menu-card {
+    background: #151515;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,20,147,0.4);
+}
+
+.menu-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.menu-content {
+    padding: 30px;
+}
+
+.menu-content h3 {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.price {
+    color: #ff4fb2;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.feature {
+    background: #151515;
+    padding: 35px;
+    border-radius: 22px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.feature h3 {
+    margin-top: 0;
+    color: #ff4fb2;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+}
+
+.calculator,
+.booking-box,
+.contact-box {
+    background: #151515;
+    padding: 40px;
+    border-radius: 24px;
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+select,
+input,
+textarea {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: none;
+    background: #222;
+    color: white;
+    font-family: inherit;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #ff1493;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+    color: #ff4fb2;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.contact-links a {
+    text-decoration: none;
+    color: white;
+    background: #222;
+    padding: 14px 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.contact-links a:hover {
+    background: #ff1493;
+}
+
+footer {
+    padding: 40px 20px;
+    text-align: center;
+    background: #050505;
+    color: #888;
+}
+
+@media(max-width:768px) {
+
+header {
+    min-height: 80vh;
+}
+
+.section-title {
+    font-size: 34px;
+}
+
+.gallery img {
+    height: 260px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="hero-content">
+
+<img src="logo.jpg" alt="Patteperfekt" class="logo">
+
+<h1>Patte<span class="highlight">perfekt</span></h1>
+
+<p>
+Helstegt pattegris til firmafester, bryllupper,
+fødselsdage og større arrangementer.
+
+Vi leverer mad med fokus på kvalitet,
+smag og en god oplevelse.
+</p>
+
+<div class="hero-buttons">
+<a href="tel:60531341" class="btn btn-primary">Ring nu</a>
+<a href="#booking" class="btn btn-secondary">Send forespørgsel</a>
+</div>
+
+</div>
+
+</header>
+
+<section>
+<div class="container">
+
+<h2 class="section-title">Vores menuer</h2>
+<p class="section-subtitle">
+Enkle løsninger med fokus på god mad og store oplevelser.
+</p>
+
+<div class="menu-grid">
+
+<div class="menu-card">
+<img src="menu.jpg" class="menu-image">
+<div class="menu-content">
+<h3>Menu 1</h3>
+<p>Helstegt pattegris med salater og flutes.</p>
+<div class="price">219 kr</div>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="menu.jpg" class="menu-image">
+<div class="menu-content">
+<h3>Menu 2</h3>
+<p>Helstegt pattegris med kartofler.</p>
+<div class="price">185 kr</div>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="menu.jpg" class="menu-image">
+<div class="menu-content">
+<h3>Supervisor</h3>
+<p>Vi guider jer igennem hele processen.</p>
+<div class="price">99 kr</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<h2 class="section-title">Prisberegner</h2>
+
+<div class="calculator">
+
+<select id="menu">
+<option value="219">Menu 1 - 219 kr</option>
+<option value="185">Menu 2 - 185 kr</option>
+<option value="99">Supervisor - 99 kr</option>
+</select>
+
+<input type="number" id="persons" placeholder="Antal personer">
+
+<button onclick="calculatePrice()">Beregn pris</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<h2 class="section-title">Galleri</h2>
+<p class="section-subtitle">
+Stemningsbilleder fra arrangementer og serveringer.
+</p>
+
+<div class="gallery">
+<img src="menu.jpg">
+<img src="menu.jpg">
+<img src="menu.jpg">
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<h2 class="section-title">Hvorfor vælge os</h2>
+
+<div class="features">
+
+<div class="feature">
+<h3>Kvalitet</h3>
+<p>Fokus på smag, råvarer og en god oplevelse.</p>
+</div>
+
+<div class="feature">
+<h3>Pålidelighed</h3>
+<p>Vi kommer til tiden og leverer som aftalt.</p>
+</div>
+
+<div class="feature">
+<h3>Store arrangementer</h3>
+<p>Perfekt til firmafester, fødselsdage og events.</p>
+</div>
+
+<div class="feature">
+<h3>Nem booking</h3>
+<p>Hurtig kontakt og enkel planlægning.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="booking">
+<div class="container">
+
+<h2 class="section-title">Online forespørgsel</h2>
+
+<div class="booking-box">
+
+<form action="https://formspree.io/f/mgodovja" method="POST">
+
+<input type="text" name="name" placeholder="Dit navn" required>
+
+<input type="email" name="email" placeholder="Din email" required>
+
+<input type="text" name="date" placeholder="Dato for arrangement" required>
+
+<input type="number" name="persons" placeholder="Antal personer" required>
+
+<select name="menu">
+<option value="Menu 1">Menu 1 - 219 kr</option>
+<option value="Menu 2">Menu 2 - 185 kr</option>
+<option value="Supervisor">Supervisor - 99 kr</option>
 </select>
 
 <textarea name="message" rows="6" placeholder="Skriv lidt om arrangementet"></textarea>
@@ -65,3 +519,4 @@ document.getElementById("result").innerText =
 
 </body>
 </html>
+```
