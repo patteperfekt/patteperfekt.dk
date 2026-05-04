@@ -394,11 +394,20 @@ fødselsdage og større arrangementer.
 <option value="99">Supervisor - 99 kr</option>
 </select>
 
-<input type="number" id="persons" placeholder="Antal personer">
+<input 
+type="number" 
+id="persons" 
+placeholder="Antal personer"
+min="30"
+value="30">
 
 <button onclick="calculatePrice()">Beregn pris</button>
 
 <h2 id="result"></h2>
+
+<p style="text-align:center; color:#999; margin-top:15px;">
+Minimum 30 personer
+</p>
 
 </div>
 
