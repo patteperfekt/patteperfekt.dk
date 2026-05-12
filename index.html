@@ -305,7 +305,7 @@ fødselsdage og større arrangementer.
 </p>
 
 <div class="hero-buttons">
-<a href="tel:60531341" class="btn btn-primary">Ring nu</a>
+<a href="tel:91855631" class="btn btn-primary">Ring nu</a>
 <a href="#booking" class="btn btn-secondary">Send forespørgsel</a>
 </div>
 
@@ -506,8 +506,8 @@ Kontakt os direkte på telefon, SMS eller mail.
 </p>
 
 <div class="contact-links">
-<a href="tel:60531341">60531341</a>
-<a href="sms:60531341">SMS</a>
+<a href="tel:91855631">91855631</a>
+<a href="sms:91855631">SMS</a>
 <a href="mailto:patteperfekt@gmail.com">patteperfekt@gmail.com</a>
 <a href="https://www.facebook.com/profile.php?id=61566722272167" target="_blank">Facebook</a>
 </div>
@@ -530,9 +530,9 @@ function calculatePrice() {
 let price = document.getElementById("menu").value;
 let persons = document.getElementById("persons").value;
 
-if(persons <= 0) {
+if(persons < 30) {
     document.getElementById("result").innerText =
-    "Indtast antal personer";
+    "Minimum 30 personer";
     return;
 }
 
