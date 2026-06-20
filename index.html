@@ -195,7 +195,6 @@ section {
     transform: scale(1.02);
 }
 
-.calculator,
 .booking-box,
 .contact-box {
     background: #151515;
@@ -381,38 +380,7 @@ fødselsdage og større arrangementer.
 </div>
 </section>
 
-<section>
-<div class="container">
 
-<h2 class="section-title">Prisberegner</h2>
-
-<div class="calculator">
-
-<select id="menu">
-<option value="219">Menu 1 - 219 kr</option>
-<option value="185">Menu 2 - 185 kr</option>
-<option value="99">Supervisor - 99 kr</option>
-</select>
-
-<input 
-type="number" 
-id="persons" 
-placeholder="Antal personer"
-min="30"
-value="30">
-
-<button onclick="calculatePrice()">Beregn pris</button>
-
-<h2 id="result"></h2>
-
-<p style="text-align:center; color:#999; margin-top:15px;">
-Minimum 30 personer
-</p>
-
-</div>
-
-</div>
-</section>
 
 <section>
 <div class="container">
@@ -460,39 +428,32 @@ Minimum 30 personer
 </div>
 </section>
 
+
 <section id="booking">
 <div class="container">
-
-<h2 class="section-title">Online forespørgsel</h2>
-
+<h2 class="section-title">Få et tilbud</h2>
 <div class="booking-box">
+<p style="text-align:center;">Udfyld formularen nedenfor og modtag et uforpligtende tilbud.</p>
 
-<form action="https://formspree.io/f/mgodovja" method="POST">
+<input id="name" type="text" placeholder="Dit navn" required>
+<input id="phone" type="text" placeholder="Telefonnummer" required>
+<input id="email" type="email" placeholder="Din email" required>
+<input id="date" type="date" required>
+<input id="persons" type="number" min="30" value="30" placeholder="Antal personer">
 
-<input type="text" name="name" placeholder="Dit navn" required>
-
-<input type="email" name="email" placeholder="Din email" required>
-
-<input type="text" name="date" placeholder="Dato for arrangement" required>
-
-<input type="number" name="persons" placeholder="Antal personer" required>
-
-<select name="menu">
+<select id="menuSelect">
 <option value="Menu 1">Menu 1 - 219 kr</option>
 <option value="Menu 2">Menu 2 - 185 kr</option>
-<option value="Supervisor">Supervisor - 99 kr</option>
 </select>
 
-<textarea name="message" rows="6" placeholder="Skriv lidt om arrangementet"></textarea>
+<textarea id="message" rows="6" placeholder="Skriv lidt om arrangementet"></textarea>
 
-<button type="submit">Send forespørgsel</button>
-
-</form>
-
+<button onclick="sendOffer()">Send forespørgsel</button>
+<p id="status"></p>
 </div>
-
 </div>
 </section>
+
 
 <section>
 <div class="container">
@@ -523,27 +484,30 @@ Kontakt os direkte på telefon, SMS eller mail.
 
 </footer>
 
+
 <script>
+const WEBHOOK="https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
 
-function calculatePrice() {
+async function sendOffer(){
+const payload={
+name:document.getElementById('name').value,
+phone:document.getElementById('phone').value,
+email:document.getElementById('email').value,
+date:document.getElementById('date').value,
+persons:document.getElementById('persons').value,
+menu:document.getElementById('menuSelect').value,
+message:document.getElementById('message').value
+};
 
-let price = document.getElementById("menu").value;
-let persons = document.getElementById("persons").value;
+await fetch(WEBHOOK,{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify(payload)
+});
 
-if(persons < 30) {
-    document.getElementById("result").innerText =
-    "Minimum 30 personer";
-    return;
+document.getElementById('status').innerText='Tak for din forespørgsel. Vi kontakter dig hurtigst muligt.';
 }
-
-let total = price * persons;
-
-document.getElementById("result").innerText =
-"Samlet pris: " + total + " kr";
-
-}
-
 </script>
-
 </body>
+
 </html>
