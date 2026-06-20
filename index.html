@@ -285,6 +285,178 @@ header {
 
 }
 
+
+    :root {
+      --bg: #080808;
+      --card: #171717;
+      --card2: #202020;
+      --text: #f4f4f4;
+      --muted: #a9a9a9;
+      --pink: #ff1493;
+      --pink2: #ff5fbd;
+      --border: #2b2b2b;
+      --green: #4ade80;
+      --red: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    .pp-offer-wrapper {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 60px 18px;
+    }
+
+    .pp-offer-wrapper h1 {
+      text-align: center;
+      font-size: 44px;
+      margin-bottom: 8px;
+    }
+
+    .pp-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 34px;
+      font-size: 18px;
+    }
+
+    .pp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    .pp-card label {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .pp-card input,
+    .pp-card select,
+    .pp-card textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .pp-card textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .pp-card button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 17px;
+      border: none;
+      border-radius: 14px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pp-card button:hover { background: var(--pink2); }
+
+    .pp-card button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .pp-hidden { display: none; }
+
+    .pp-reveal {
+      animation: ppSlideDown .35s ease forwards;
+    }
+
+    @keyframes ppSlideDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .pp-price-box {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #111;
+      text-align: center;
+    }
+
+    .pp-price {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--pink2);
+    }
+
+    .pp-muted { color: var(--muted); }
+
+    .pp-thankyou {
+      text-align: center;
+      background: linear-gradient(145deg, #151515, #101010);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .pp-check {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #06120a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .pp-error {
+      color: var(--red);
+      font-weight: 700;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .pp-small {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .pp-offer-wrapper h1 { font-size: 34px; }
+      .pp-grid { grid-template-columns: 1fr; }
+      .pp-offer-wrapper { padding: 38px 14px; }
+    }
+  
 </style>
 </head>
 
@@ -429,30 +601,105 @@ fødselsdage og større arrangementer.
 </section>
 
 
+
 <section id="booking">
 <div class="container">
-<h2 class="section-title">Få et tilbud</h2>
-<div class="booking-box">
-<p style="text-align:center;">Udfyld formularen nedenfor og modtag et uforpligtende tilbud.</p>
 
-<input id="name" type="text" placeholder="Dit navn" required>
-<input id="phone" type="text" placeholder="Telefonnummer" required>
-<input id="email" type="email" placeholder="Din email" required>
-<input id="date" type="date" required>
-<input id="persons" type="number" min="30" value="30" placeholder="Antal personer">
+    <h1>Få et prisoverslag</h1>
+    <p class="pp-sub">Beregn prisen og få et uforpligtende tilbud sendt til din mail.<br>Ring også gerne på 91 85 56 31.</p>
 
-<select id="menuSelect">
-<option value="Menu 1">Menu 1 - 219 kr</option>
-<option value="Menu 2">Menu 2 - 185 kr</option>
-</select>
+    <section class="pp-card">
+      <h2>1. Beregn pris</h2>
 
-<textarea id="message" rows="6" placeholder="Skriv lidt om arrangementet"></textarea>
+      <label for="pp-menu">Vælg menu</label>
+      <select id="pp-menu">
+        <option value="219" data-name="Menu 1 – helstegt pattegris med salater og flutes">Menu 1 – 219 kr/person</option>
+        <option value="185" data-name="Menu 2 – helstegt pattegris med kartofler">Menu 2 – 185 kr/person</option>
+      </select>
 
-<button onclick="sendOffer()">Send forespørgsel</button>
-<p id="status"></p>
-</div>
+      <label for="pp-persons">Antal personer</label>
+      <input id="pp-persons" type="number" min="30" value="30">
+
+      <label for="pp-delivery">Levering</label>
+      <select id="pp-delivery">
+        <option value="0" data-label="Ingen levering valgt">Ingen levering valgt</option>
+        <option value="500" data-label="Esbjerg – 500 kr">Esbjerg – 500 kr</option>
+        <option value="1000" data-label="Uden for Esbjerg – 1000 kr">Uden for Esbjerg – 1000 kr</option>
+      </select>
+
+      <p class="pp-small">Levering: 500 kr i Esbjerg og 1000 kr udenfor Esbjerg. Vi kører maksimalt 1 time hver vej.</p>
+
+      <button type="button" onclick="ppCalculatePrice()">Beregn pris</button>
+
+      <div id="pp-priceBox" class="pp-price-box pp-hidden">
+        <p class="pp-muted">Samlet prisoverslag</p>
+        <div id="pp-totalPrice" class="pp-price">0 kr</div>
+        <p class="pp-muted">Fortsæt for at få tilbuddet sendt på mail.</p>
+      </div>
+    </section>
+
+    <section id="pp-leadSection" class="pp-card pp-hidden">
+      <h2>2. Få tilbuddet sendt</h2>
+      <p class="pp-muted">Udfyld dine oplysninger, så sender vi tilbuddet til dig og modtager samtidig din forespørgsel.</p>
+
+      <div class="pp-grid">
+        <div>
+          <label for="pp-name">Navn</label>
+          <input id="pp-name" placeholder="Fx Mads Jensen" required>
+        </div>
+
+        <div>
+          <label for="pp-phone">Telefon</label>
+          <input id="pp-phone" placeholder="Fx 12 34 56 78" required>
+        </div>
+      </div>
+
+      <label for="pp-email">Email</label>
+      <input id="pp-email" type="email" placeholder="Fx mads@email.dk" required>
+
+      <div class="pp-grid">
+        <div>
+          <label for="pp-date">Dato for arrangement</label>
+          <input id="pp-date" type="date" required>
+        </div>
+
+        <div>
+          <label for="pp-eventType">Type arrangement</label>
+          <select id="pp-eventType">
+            <option>Firmafest</option>
+            <option>Bryllup</option>
+            <option>Fødselsdag</option>
+            <option>Konfirmation</option>
+            <option>Andet arrangement</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="pp-notes">Særlige ønsker</label>
+      <textarea id="pp-notes" placeholder="Fx tidspunkt, adresse, ekstra spørgsmål eller ønsker til servering"></textarea>
+
+      <p class="pp-small">
+        Ved at sende formularen accepterer du, at PattePerfekt må kontakte dig angående din forespørgsel.
+        Prisoverslaget er vejledende og endelig pris bekræftes ved kontakt.
+      </p>
+
+      <button id="pp-sendButton" type="button" onclick="ppSendOffer()">Send tilbud</button>
+      <p id="pp-errorMessage" class="pp-error pp-hidden"></p>
+    </section>
+
+    <section id="pp-confirmationSection" class="pp-card pp-hidden">
+      <div class="pp-thankyou">
+        <div class="pp-check">✓</div>
+        <h2>Tak for din forespørgsel</h2>
+        <p id="pp-thankYouText" class="pp-muted"></p>
+        <div id="pp-confirmationPrice" class="pp-price">0 kr</div>
+        <p class="pp-small">PattePerfekt kontakter dig hurtigst muligt for at bekræfte dato, levering og de sidste detaljer.</p>
+      </div>
+    </section>
+  
 </div>
 </section>
+
 
 
 <section>
@@ -486,28 +733,158 @@ Kontakt os direkte på telefon, SMS eller mail.
 
 
 <script>
-const WEBHOOK="https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
+    /*
+      VIGTIGT:
+      Indsæt jeres Make.com webhook URL her.
+      Den skal ligne noget i stil med:
+      https://hook.eu2.make.com/xxxxxxxxxxxxxxxxxxxxxxxx
+    */
+    const PP_MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
 
-async function sendOffer(){
-const payload={
-name:document.getElementById('name').value,
-phone:document.getElementById('phone').value,
-email:document.getElementById('email').value,
-date:document.getElementById('date').value,
-persons:document.getElementById('persons').value,
-menu:document.getElementById('menuSelect').value,
-message:document.getElementById('message').value
-};
+    let ppState = {};
 
-await fetch(WEBHOOK,{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify(payload)
-});
+    function ppFormatKr(amount) {
+      return amount.toLocaleString("da-DK") + " kr";
+    }
 
-document.getElementById('status').innerText='Tak for din forespørgsel. Vi kontakter dig hurtigst muligt.';
-}
-</script>
+    function ppReveal(id) {
+      const el = document.getElementById(id);
+      el.classList.remove("pp-hidden");
+      el.classList.remove("pp-reveal");
+      void el.offsetWidth;
+      el.classList.add("pp-reveal");
+    }
+
+    function ppShowError(message) {
+      const error = document.getElementById("pp-errorMessage");
+      error.textContent = message;
+      error.classList.remove("pp-hidden");
+    }
+
+    function ppHideError() {
+      const error = document.getElementById("pp-errorMessage");
+      error.textContent = "";
+      error.classList.add("pp-hidden");
+    }
+
+    function ppCalculatePrice() {
+      const menu = document.getElementById("pp-menu");
+      const persons = parseInt(document.getElementById("pp-persons").value || "0");
+      const menuPrice = parseInt(menu.value);
+      const menuName = menu.options[menu.selectedIndex].dataset.name;
+
+      const delivery = document.getElementById("pp-delivery");
+      const deliveryPrice = parseInt(delivery.value);
+      const deliveryLabel = delivery.options[delivery.selectedIndex].dataset.label;
+
+      if (persons < 30) {
+        alert("Minimum er 30 personer.");
+        return;
+      }
+
+      const foodPrice = persons * menuPrice;
+      const total = foodPrice + deliveryPrice;
+
+      ppState = {
+        persons,
+        menuPrice,
+        menuName,
+        deliveryPrice,
+        deliveryLabel,
+        foodPrice,
+        total
+      };
+
+      document.getElementById("pp-totalPrice").textContent = ppFormatKr(total);
+
+      ppReveal("pp-priceBox");
+      ppReveal("pp-leadSection");
+
+      document.getElementById("pp-confirmationSection").classList.add("pp-hidden");
+      ppHideError();
+    }
+
+    async function ppSendOffer() {
+      ppHideError();
+
+      if (!ppState.total) {
+        alert("Beregn prisen først.");
+        return;
+      }
+
+      const name = document.getElementById("pp-name").value.trim();
+      const phone = document.getElementById("pp-phone").value.trim();
+      const email = document.getElementById("pp-email").value.trim();
+      const date = document.getElementById("pp-date").value;
+      const eventType = document.getElementById("pp-eventType").value;
+      const notes = document.getElementById("pp-notes").value.trim();
+
+      if (!name || !phone || !email || !date) {
+        ppShowError("Udfyld venligst navn, telefon, email og dato.");
+        return;
+      }
+
+      if (!email.includes("@")) {
+        ppShowError("Indtast venligst en gyldig email.");
+        return;
+      }
+
+      if (PP_MAKE_WEBHOOK_URL === "INDSAET_MAKE_WEBHOOK_URL_HER") {
+        ppShowError("Webhook URL mangler. Indsæt Make.com webhook URL i koden først.");
+        return;
+      }
+
+      const payload = {
+        name,
+        phone,
+        email,
+        eventDate: date,
+        eventType,
+        notes: notes || "Ingen særlige ønsker angivet.",
+        persons: ppState.persons,
+        menuName: ppState.menuName,
+        menuPrice: ppState.menuPrice,
+        foodPrice: ppState.foodPrice,
+        deliveryLabel: ppState.deliveryLabel,
+        deliveryPrice: ppState.deliveryPrice,
+        total: ppState.total,
+        totalFormatted: ppFormatKr(ppState.total),
+        source: "PattePerfekt hjemmeside",
+        submittedAt: new Date().toISOString()
+      };
+
+      const sendButton = document.getElementById("pp-sendButton");
+      sendButton.disabled = true;
+      sendButton.textContent = "Sender...";
+
+      try {
+        const response = await fetch(PP_MAKE_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("Webhook svarede ikke korrekt.");
+        }
+
+        document.getElementById("pp-thankYouText").textContent =
+          "Dit tilbud er sendt til " + email + ". PattePerfekt har også modtaget din forespørgsel.";
+
+        document.getElementById("pp-confirmationPrice").textContent = ppFormatKr(ppState.total);
+
+        ppReveal("pp-confirmationSection");
+      } catch (error) {
+        ppShowError("Noget gik galt. Prøv igen, eller kontakt PattePerfekt direkte på telefon eller mail.");
+        console.error(error);
+      } finally {
+        sendButton.disabled = false;
+        sendButton.textContent = "Send tilbud";
+      }
+    }
+  </script>
 </body>
 
 </html>
