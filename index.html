@@ -675,6 +675,18 @@ fødselsdage og større arrangementer.
         </div>
       </div>
 
+      <div class="pp-grid">
+        <div>
+          <label for="pp-address">Adresse</label>
+          <input id="pp-address" placeholder="Fx Storegade 15, 6700 Esbjerg" required>
+        </div>
+
+        <div>
+          <label for="pp-time">Tidspunkt</label>
+          <input id="pp-time" type="time" required>
+        </div>
+      </div>
+
       <label for="pp-notes">Særlige ønsker</label>
       <textarea id="pp-notes" placeholder="Fx tidspunkt, adresse, ekstra spørgsmål eller ønsker til servering"></textarea>
 
@@ -818,6 +830,8 @@ Kontakt os direkte på telefon, SMS eller mail.
       const date = document.getElementById("pp-date").value;
       const eventType = document.getElementById("pp-eventType").value;
       const notes = document.getElementById("pp-notes").value.trim();
+      const address = document.getElementById("pp-address").value.trim();
+      const time = document.getElementById("pp-time").value;
 
       if (!name || !phone || !email || !date) {
         ppShowError("Udfyld venligst navn, telefon, email og dato.");
@@ -840,6 +854,8 @@ Kontakt os direkte på telefon, SMS eller mail.
         email,
         eventDate: date,
         eventType,
+        address,
+        time,
         notes: notes || "Ingen særlige ønsker angivet.",
         persons: ppState.persons,
         menuName: ppState.menuName,
