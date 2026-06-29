@@ -164,7 +164,7 @@ const payload = {
   sendButton.textContent = "Sender...";
 
   try {
-    if (PP_MAKE_WEBHOOK_URL === "INDSAET_MAKE_WEBHOOK_URL_HER") {
+    if (PP_MAKE_WEBHOOK_URL === "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr") {
       console.log("Make.com payload klar til test:", payload);
       throw new Error("Make.com webhook URL mangler i script.js");
     }
@@ -345,7 +345,7 @@ const eventDateFormatted = eventDate
   sendButton.textContent = "Sender...";
 
   try {
-    if (PP_MAKE_WEBHOOK_URL === "INDSAET_MAKE_WEBHOOK_URL_HER") {
+    if (PP_MAKE_WEBHOOK_URL === "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr") {
       console.log("Make.com payload klar til test:", payload);
       throw new Error("Make.com webhook URL mangler i script.js");
     }
@@ -509,7 +509,7 @@ async function sendOffer() {
   sendButton.textContent = "Sender...";
 
   try {
-    if (PP_MAKE_WEBHOOK_URL === "INDSAET_MAKE_WEBHOOK_URL_HER") {
+    if (PP_MAKE_WEBHOOK_URL === "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr") {
       console.log("Make.com payload klar til test:", payload);
       throw new Error("Make.com webhook URL mangler i script.js");
     }
