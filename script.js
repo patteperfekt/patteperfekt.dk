@@ -1,13 +1,4 @@
-/*
-  Make.com integration
-  1) Find den eksisterende Make.com webhook URL i den nuværende hjemmesidekode.
-  2) Indsæt den mellem citationstegnene herunder.
-  3) Eksempel-format: https://hook.eu2.make.com/xxxxxxxxxxxxxxxxxxxx
-
-  OBS: På en ren HTML/CSS/JS-side vil webhook-URL'en være synlig i browserens kildekode.
-  Det er normalt for statiske sider. Beskyt evt. scenariet i Make.com med filter/validering.
-*/
-const PP_MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
+const PP_MAKE_WEBHOOK_URL = "INDSAET_MAKE_WEBHOOK_URL_HER";
 
 let ppState = {};
 
@@ -50,21 +41,31 @@ function calculatePrice() {
   const personsInput = getEl("pp-persons");
   const delivery = getEl("pp-delivery");
 
+  const selectedMenu = menu.options[menu.selectedIndex];
   const persons = parseInt(personsInput.value || "0", 10);
   const menuPrice = parseInt(menu.value, 10);
-  const menuName = menu.options[menu.selectedIndex].dataset.name;
+  const menuName = selectedMenu.dataset.name;
+  const minPersons = parseInt(selectedMenu.dataset.min || "30", 10);
+  const outsideMinPersons = parseInt(selectedMenu.dataset.outsideMin || "40", 10);
+  const areaRule = selectedMenu.dataset.area || "all";
   const deliveryPrice = parseInt(delivery.value, 10);
   const deliveryLabel = delivery.options[delivery.selectedIndex].dataset.label;
 
-  if (!persons || persons < 30) {
-    alert("Minimum er 30 personer.");
-    personsInput.value = 30;
+  if (!persons || persons < minPersons) {
+    alert(`${menuName} har minimum ${minPersons} personer.`);
+    personsInput.value = minPersons;
     return;
   }
 
-  if (deliveryPrice === 1000 && persons < 40) {
-    alert("Ved levering udenfor Esbjerg er minimum 40 personer.");
-    personsInput.value = 40;
+  if (areaRule === "esbjerg-only" && deliveryPrice === 1000) {
+    alert("Denne menu er lavet til små selskaber indenfor Esbjerg. Vælg levering i Esbjerg eller afhentning/aftales nærmere.");
+    delivery.value = "500";
+    return;
+  }
+
+  if (deliveryPrice === 1000 && persons < outsideMinPersons) {
+    alert(`Ved levering udenfor Esbjerg er minimum ${outsideMinPersons} personer.`);
+    personsInput.value = outsideMinPersons;
     return;
   }
 
@@ -75,6 +76,7 @@ function calculatePrice() {
     persons,
     menuPrice,
     menuName,
+    minPersons,
     deliveryPrice,
     deliveryLabel,
     foodPrice,
@@ -192,8 +194,27 @@ function setupNavigation() {
   });
 }
 
+function setupMenuMinHelper() {
+  const menu = getEl("pp-menu");
+  const personsInput = getEl("pp-persons");
+  if (!menu || !personsInput) return;
+
+  const syncMin = () => {
+    const selectedMenu = menu.options[menu.selectedIndex];
+    const minPersons = parseInt(selectedMenu.dataset.min || "30", 10);
+    personsInput.min = String(minPersons);
+    if (parseInt(personsInput.value || "0", 10) < minPersons) {
+      personsInput.value = String(minPersons);
+    }
+  };
+
+  menu.addEventListener("change", syncMin);
+  syncMin();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupNavigation();
+  setupMenuMinHelper();
   getEl("calculateBtn")?.addEventListener("click", calculatePrice);
   getEl("sendBtn")?.addEventListener("click", sendOffer);
 });
