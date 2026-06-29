@@ -129,23 +129,33 @@ async function sendOffer() {
       year: "numeric"
     })
   : "";
-  
-  const payload = {
+
+const payload = {
   name,
   phone,
   email,
+
   eventDate,
+  eventDateFormatted,
+
   eventType,
   city,
+  address,
+
   time: preferredTime,
   preferredTime: preferredTime,
-  address,
+
   persons: state.persons,
   menuName: state.menuName,
+  menuPrice: state.menuPrice,
+  foodPrice: state.foodPrice,
   deliveryLabel: state.deliveryLabel,
+  deliveryPrice: state.deliveryPrice,
   total: state.total,
   totalFormatted: formatKr(state.total),
+
   notes,
+  source: "PattePerfekt hjemmeside",
   submittedAt: new Date().toISOString()
 };
 
