@@ -122,7 +122,7 @@ async function sendOffer() {
     return;
   }
 
-  const eventDateFormatted = eventDate
+const eventDateFormatted = eventDate
   ? new Date(eventDate + "T00:00:00").toLocaleDateString("da-DK", {
       day: "2-digit",
       month: "2-digit",
