@@ -123,26 +123,23 @@ async function sendOffer() {
   }
 
   const payload = {
-    name,
-    phone,
-    email,
-    eventDate: date,
-    eventType,
-    city: city || "Ikke angivet",
-    preferredTime: time || "Ikke angivet",
-    address: address || "Ikke angivet",
-    notes: notes || "Ingen særlige ønsker angivet.",
-    persons: ppState.persons,
-    menuName: ppState.menuName,
-    menuPrice: ppState.menuPrice,
-    foodPrice: ppState.foodPrice,
-    deliveryLabel: ppState.deliveryLabel,
-    deliveryPrice: ppState.deliveryPrice,
-    total: ppState.total,
-    totalFormatted: ppState.totalFormatted,
-    source: "PattePerfekt hjemmeside",
-    submittedAt: new Date().toISOString()
-  };
+  name,
+  phone,
+  email,
+  eventDate,
+  eventType,
+  city,
+  time: preferredTime,
+  preferredTime: preferredTime,
+  address,
+  persons: state.persons,
+  menuName: state.menuName,
+  deliveryLabel: state.deliveryLabel,
+  total: state.total,
+  totalFormatted: formatKr(state.total),
+  notes,
+  submittedAt: new Date().toISOString()
+};
 
   const sendButton = getEl("sendBtn");
   sendButton.disabled = true;
