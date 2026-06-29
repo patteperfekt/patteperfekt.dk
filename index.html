@@ -10,13 +10,14 @@
 <body>
   <header class="site-header" id="top">
     <nav class="nav">
-      <a class="brand logo-brand" href="#">
-  <img src="logo-navbar.png" alt="PattePerfekt logo">
-</a>
+      <a class="brand logo-brand" href="#top" aria-label="Gå til toppen">
+        <img src="logo-navbar.png" alt="PattePerfekt logo" />
+      </a>
       <button class="nav-toggle" type="button" aria-label="Åbn menu" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="#menuer">Menuer</a>
         <a href="#pris">Pris</a>
+        <a href="#galleri">Galleri</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
       </div>
@@ -31,6 +32,7 @@
         </p>
         <div class="hero-points">
           <span>Menu fra 185 kr. pr. person</span>
+          <span>Små selskaber fra 10 personer</span>
           <span>Udskæring inkluderet</span>
           <span>Beregn pris på under 30 sekunder</span>
         </div>
@@ -58,7 +60,7 @@
         <h2>Fra prisoverslag til færdig aftale</h2>
       </div>
       <div class="process-grid">
-        <article class="process-card"><strong>1</strong><h3>Vælg menu</h3><p>Vælg Menu 1 eller Menu 2 og indtast antal personer.</p></article>
+        <article class="process-card"><strong>1</strong><h3>Vælg menu</h3><p>Vælg mellem de klassiske pattegris-menuer eller de nye menuer til små selskaber.</p></article>
         <article class="process-card"><strong>2</strong><h3>Beregn pris</h3><p>Få et vejledende prisoverslag med levering.</p></article>
         <article class="process-card"><strong>3</strong><h3>Send forespørgsel</h3><p>Udfyld kontaktinfo, dato, adresse og særlige ønsker.</p></article>
         <article class="process-card"><strong>4</strong><h3>Bliv kontaktet</h3><p>PattePerfekt bekræfter dato, levering og de sidste detaljer.</p></article>
@@ -69,12 +71,12 @@
       <div class="section-head">
         <p class="eyebrow">Vores menuer</p>
         <h2>Menuer og priser</h2>
-        <p class="section-intro">Supervisor-pakken er fjernet, så siden kun fokuserer på de to klare menuer.</p>
+        <p class="section-intro">Vælg mellem klassisk helstegt pattegris eller de nye menuer til små selskaber i Esbjerg.</p>
       </div>
 
       <div class="menu-poster-grid">
         <article class="menu-poster-card">
-          <img src="menu-1.png" alt="Menu 1 - Helstegt pattegris med salater, flødekartofler og flutes" />
+          <img src="menu-1-ny.png" alt="Menu 1 - Helstegt pattegris med salater, flødekartofler og flutes" />
           <div class="menu-text-fallback">
             <h3>Menu 1 – 219 kr. pr. person</h3>
             <p>Årstidens grøn mix salat, pastasalat med pesto, flødekartofler, flutes og udskæring.</p>
@@ -82,10 +84,26 @@
         </article>
 
         <article class="menu-poster-card">
-          <img src="menu-2.png" alt="Menu 2 - Helstegt pattegris med flødekartofler" />
+          <img src="menu-2-ny.png" alt="Menu 2 - Helstegt pattegris med flødekartofler" />
           <div class="menu-text-fallback">
             <h3>Menu 2 – 185 kr. pr. person</h3>
             <p>Helstegt pattegris med flødekartofler og udskæring inkluderet.</p>
+          </div>
+        </article>
+
+        <article class="menu-poster-card">
+          <img src="menu-3-pulled-pork.png" alt="Menu til små selskaber - pulled pork burgere" />
+          <div class="menu-text-fallback">
+            <h3>Pulled pork burgere – 195 kr. pr. person</h3>
+            <p>Coleslaw, hjemmesyltede rødløg, små ristede kartofler, pastasalat og majskolber. Minimum 10 personer.</p>
+          </div>
+        </article>
+
+        <article class="menu-poster-card">
+          <img src="menu-4-spareribs.png" alt="Menu til små selskaber - spareribs" />
+          <div class="menu-text-fallback">
+            <h3>Spareribs – 210 kr. pr. person</h3>
+            <p>Bagt kartoffel, kryddersmør, coleslaw, pastasalat og majskolber. Minimum 10 personer.</p>
           </div>
         </article>
       </div>
@@ -104,13 +122,15 @@
 
           <label for="pp-menu">Vælg menu</label>
           <select id="pp-menu">
-            <option value="219" data-name="Menu 1 – helstegt pattegris med salater, flødekartofler og flutes">Menu 1 – 219 kr. pr. person</option>
-            <option value="185" data-name="Menu 2 – helstegt pattegris med flødekartofler">Menu 2 – 185 kr. pr. person</option>
+            <option value="219" data-name="Menu 1 – helstegt pattegris med salater, flødekartofler og flutes" data-min="30" data-outside-min="40" data-area="all">Menu 1 – 219 kr. pr. person</option>
+            <option value="185" data-name="Menu 2 – helstegt pattegris med flødekartofler" data-min="30" data-outside-min="40" data-area="all">Menu 2 – 185 kr. pr. person</option>
+            <option value="195" data-name="Pulled pork burgere – menu til små selskaber" data-min="10" data-outside-min="10" data-area="esbjerg-only">Menu 3 – 195 kr. pr. person</option>
+            <option value="210" data-name="Spareribs – menu til små selskaber" data-min="10" data-outside-min="10" data-area="esbjerg-only">Menu 4 – 210 kr. pr. person</option>
           </select>
 
           <label for="pp-persons">Antal personer</label>
           <input id="pp-persons" type="number" min="30" value="30" inputmode="numeric" />
-          <small class="form-help">Minimum 30 personer. Ved levering udenfor Esbjerg er minimum 40 personer.</small>
+          <small class="form-help">Menu 1 og 2: minimum 30 personer. Små selskaber: minimum 10 personer og indenfor Esbjerg.</small>
 
           <label for="pp-delivery">Levering</label>
           <select id="pp-delivery">
@@ -208,6 +228,30 @@
       </div>
     </section>
 
+    <section id="galleri" class="section gallery-section">
+      <div class="section-head">
+        <p class="eyebrow">Galleri</p>
+        <h2>Se maden fra rigtige arrangementer</h2>
+        <p class="section-intro">Ægte billeder af helstegt pattegris og spareribs fra PattePerfekt.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <a class="gallery-item large" href="gallery-pattegris-2.jpg" aria-label="Åbn billede af spareribs">
+          <img src="gallery-pattegris-2.jpg" alt="Glaserede spareribs i køkkenbakke" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="gallery-ribs-2.jpg" aria-label="Åbn billede af spareribs">
+          <img src="gallery-ribs-2.jpg" alt="Spareribs med barbecue glaze" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="gallery-ribs-1.jpg" aria-label="Åbn billede af helstegt pattegris">
+          <img src="gallery-ribs-1.jpg" alt="Helstegt pattegris på grill" loading="lazy" />
+        </a>
+        <a class="gallery-item wide" href="gallery-pattegris-1.jpg" aria-label="Åbn billede af helstegt pattegris">
+          <img src="gallery-pattegris-1.jpg" alt="Helstegt pattegris tæt på grillen" loading="lazy" />
+        </a>
+      </div>
+    </section>
+
+
     <section id="faq" class="section dark faq-section">
       <div class="section-head">
         <p class="eyebrow">FAQ</p>
@@ -216,15 +260,19 @@
       <div class="faq-list">
         <details open>
           <summary>Hvor mange personer er minimum?</summary>
-          <p>Minimum er 30 personer. Ved levering udenfor Esbjerg regner prisberegneren med minimum 40 personer.</p>
+          <p>Menu 1 og 2 har minimum 30 personer. Ved levering udenfor Esbjerg regner prisberegneren med minimum 40 personer. De nye menuer til små selskaber har minimum 10 personer og er markeret som indenfor Esbjerg.</p>
+        </details>
+        <details>
+          <summary>Hvad gælder for små selskaber?</summary>
+          <p>Menu 3 og 4 er lavet til mindre selskaber med minimum 10 personer. De leveres i varme kasser indenfor Esbjerg. Ved over 30 gæster kommer PattePerfekt ud og steger/griller det hele af.</p>
         </details>
         <details>
           <summary>Leverer I udenfor Esbjerg?</summary>
-          <p>Ja. Levering i Esbjerg koster 500 kr., og levering udenfor Esbjerg koster 1.000 kr. Køreafstand er cirka maks. 1 time hver vej.</p>
+          <p>Ja. Levering i Esbjerg koster 500 kr., og levering udenfor Esbjerg koster 1.000 kr. Køreafstand er cirka maks. 1 time hver vej. Bemærk dog menu 3 og 4 kun er indenfor Esbjerg</p>
         </details>
         <details>
           <summary>Er udskæring inkluderet?</summary>
-          <p>Ja, udskæring er inkluderet i begge menuer.</p>
+          <p>Ja, udskæring er inkluderet i menu 1 og 2. Menu 3 og 4 under 30 personer, leveres i varmekasser.</p>
         </details>
         <details>
           <summary>Er prisen bindende?</summary>
