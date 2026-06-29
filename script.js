@@ -309,12 +309,20 @@ async function sendOffer() {
     showError("Indtast venligst en gyldig email.");
     return;
   }
-
+  
+const eventDateFormatted = eventDate
+  ? new Date(eventDate + "T00:00:00").toLocaleDateString("da-DK", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    })
+  : "";
+  
   const payload = {
     name,
     phone,
     email,
-    eventDate: date,
+    eventDate: eventDateFormatted,
     eventType,
     city: city || "Ikke angivet",
     preferredTime: time || "Ikke angivet",
