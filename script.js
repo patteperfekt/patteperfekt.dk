@@ -1,3 +1,12 @@
+/*
+  Make.com integration
+  1) Find den eksisterende Make.com webhook URL i den nuværende hjemmesidekode.
+  2) Indsæt den mellem citationstegnene herunder.
+  3) Eksempel-format: https://hook.eu2.make.com/xxxxxxxxxxxxxxxxxxxx
+
+  OBS: På en ren HTML/CSS/JS-side vil webhook-URL'en være synlig i browserens kildekode.
+  Det er normalt for statiske sider. Beskyt evt. scenariet i Make.com med filter/validering.
+*/
 const PP_MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
 
 let ppState = {};
@@ -105,14 +114,14 @@ async function sendOffer() {
   const name = getEl("pp-name").value.trim();
   const phone = getEl("pp-phone").value.trim();
   const email = getEl("pp-email").value.trim();
-  const date = getEl("pp-date").value;
+  const eventDate = getEl("pp-date").value;
   const eventType = getEl("pp-eventType").value;
   const city = getEl("pp-city").value.trim();
-  const time = getEl("pp-time").value;
+  const preferredTime = getEl("pp-time").value;
   const address = getEl("pp-address").value.trim();
   const notes = getEl("pp-notes").value.trim();
 
-  if (!name || !phone || !email || !date) {
+  if (!name || !phone || !email || !eventDate) {
     showError("Udfyld venligst navn, telefon, email og dato.");
     return;
   }
@@ -123,68 +132,71 @@ async function sendOffer() {
   }
 
   const eventDateFormatted = eventDate
-  ? new Date(eventDate + "T00:00:00").toLocaleDateString("da-DK", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    })
-  : "";
+    ? new Date(eventDate + "T00:00:00").toLocaleDateString("da-DK", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      })
+    : "";
 
   const payload = {
-  name,
-  phone,
-  email,
+    name,
+    phone,
+    email,
 
-  eventDate,
-  eventDateFormatted,
+    // Rå dato fra inputfeltet, fx 2026-07-08
+    eventDate,
 
-  eventType,
-  city,
-  address,
+    // Dansk dato til mail i Make.com, fx 08.07.2026
+    eventDateFormatted,
 
-  time: preferredTime,
-  preferredTime: preferredTime,
+    eventType,
+    city: city || "Ikke angivet",
+    address: address || "Ikke angivet",
 
-  persons: state.persons,
-  menuName: state.menuName,
-  menuPrice: state.menuPrice,
-  foodPrice: state.foodPrice,
-  deliveryLabel: state.deliveryLabel,
-  deliveryPrice: state.deliveryPrice,
-  total: state.total,
-  totalFormatted: formatKr(state.total),
+    // Begge felter sendes, så Make kan bruge enten {{1.time}} eller {{1.preferredTime}}
+    time: preferredTime || "Ikke angivet",
+    preferredTime: preferredTime || "Ikke angivet",
 
-  notes,
-  source: "PattePerfekt hjemmeside",
-  submittedAt: new Date().toISOString()
-};
+    persons: ppState.persons,
+    menuName: ppState.menuName,
+    menuPrice: ppState.menuPrice,
+    foodPrice: ppState.foodPrice,
+    deliveryLabel: ppState.deliveryLabel,
+    deliveryPrice: ppState.deliveryPrice,
+    total: ppState.total,
+    totalFormatted: ppState.totalFormatted,
+
+    notes: notes || "Ingen særlige ønsker angivet.",
+    source: "PattePerfekt hjemmeside",
+    submittedAt: new Date().toLocaleString("da-DK")
+  };
 
   const sendButton = getEl("sendBtn");
   sendButton.disabled = true;
   sendButton.textContent = "Sender...";
 
   try {
-    if (PP_MAKE_WEBHOOK_URL === "INDSAET_MAKE_WEBHOOK_URL_HER") {
+    if (!PP_MAKE_WEBHOOK_URL || !PP_MAKE_WEBHOOK_URL.startsWith("https://hook.")) {
       console.log("Make.com payload klar til test:", payload);
-      throw new Error("Make.com webhook URL mangler i script.js");
+      throw new Error("Make.com webhook URL mangler eller er ugyldig i script.js");
     }
 
-    const response = await fetch(PP_MAKE_WEBHOOK_URL, {
+    await fetch(PP_MAKE_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
 
-    if (!response.ok) throw new Error("Webhook svarede ikke korrekt.");
-
     getEl("pp-thankYouText").textContent =
       `Dit tilbud er sendt til ${email}. PattePerfekt har også modtaget din forespørgsel.`;
+
     getEl("pp-confirmationPrice").textContent = ppState.totalFormatted;
     show("pp-confirmationSection");
     getEl("pp-confirmationSection").scrollIntoView({ behavior: "smooth", block: "center" });
   } catch (error) {
     console.error(error);
-    showError("Noget gik galt. Prøv igen, eller kontakt PattePerfekt direkte på telefon eller mail.");
+    showError("Fejl: " + error.message);
   } finally {
     sendButton.disabled = false;
     sendButton.textContent = "Send min forespørgsel";
