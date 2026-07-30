@@ -197,7 +197,7 @@ async function sendOffer() {
     }
 
     getEl("pp-thankYouText").textContent =
-      `Tak for din forespørgsel! 🐷 Vi har modtaget dine oplysninger og vender tilbage hurtigst muligt. Bemærk: Din booking er først gældende, når du har modtaget en bekræftelse fra os. Vi glæder os til at hjælpe med jeres arrangement! – PattePerfekt`;
+      `Vi har modtaget dine oplysninger. Vi vender tilbage hurtigst muligt med en bekræftelse.`;
 
     getEl("pp-confirmationPrice").textContent = ppState.totalFormatted;
     show("pp-confirmationSection");
