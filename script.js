@@ -1,13 +1,8 @@
 /*
-  Make.com integration
-  1) Find den eksisterende Make.com webhook URL i den nuværende hjemmesidekode.
-  2) Indsæt den mellem citationstegnene herunder.
-  3) Eksempel-format: https://hook.eu2.make.com/xxxxxxxxxxxxxxxxxxxx
-
-  OBS: På en ren HTML/CSS/JS-side vil webhook-URL'en være synlig i browserens kildekode.
-  Det er normalt for statiske sider. Beskyt evt. scenariet i Make.com med filter/validering.
+  Formspree integration
+  Bookingforespørgsler sendes direkte fra hjemmesiden til Formspree.
 */
-const PP_MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/4gp8psvihyalvi9xpr6u1scl6hosg5mr";
+const PP_FORMSPREE_URL = "https://formspree.io/f/mgodovja";
 
 let ppState = {};
 
@@ -147,14 +142,14 @@ async function sendOffer() {
     // Rå dato fra inputfeltet, fx 2026-07-08
     eventDate,
 
-    // Dansk dato til mail i Make.com, fx 08.07.2026
+    // Dansk dato til mailen, fx 08.07.2026
     eventDateFormatted,
 
     eventType,
     city: city || "Ikke angivet",
     address: address || "Ikke angivet",
 
-    // Begge felter sendes, så Make kan bruge enten {{1.time}} eller {{1.preferredTime}}
+    // Begge felter sendes for kompatibilitet
     time: preferredTime || "Ikke angivet",
     preferredTime: preferredTime || "Ikke angivet",
 
@@ -177,16 +172,29 @@ async function sendOffer() {
   sendButton.textContent = "Sender...";
 
   try {
-    if (!PP_MAKE_WEBHOOK_URL || !PP_MAKE_WEBHOOK_URL.startsWith("https://hook.")) {
-      console.log("Make.com payload klar til test:", payload);
-      throw new Error("Make.com webhook URL mangler eller er ugyldig i script.js");
+    if (!PP_FORMSPREE_URL || !PP_FORMSPREE_URL.startsWith("https://formspree.io/f/")) {
+      throw new Error("Formspree endpoint mangler eller er ugyldigt i script.js");
     }
 
-    await fetch(PP_MAKE_WEBHOOK_URL, {
+    const response = await fetch(PP_FORMSPREE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
       body: JSON.stringify(payload)
     });
+
+    if (!response.ok) {
+      let message = "Formularen kunne ikke sendes. Prøv igen.";
+      try {
+        const data = await response.json();
+        if (data.errors && data.errors.length) {
+          message = data.errors.map((item) => item.message).join(" ");
+        }
+      } catch (_) {}
+      throw new Error(message);
+    }
 
     getEl("pp-thankYouText").textContent =
       `Dit tilbud er sendt til ${email}. PattePerfekt har også modtaget din forespørgsel.`;
